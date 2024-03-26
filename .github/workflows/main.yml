@@ -20,9 +20,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and Push Docker image
         run: |
-          docker build -t riyazkhan774/backend-image:stable -t riyazkhan774/backend-image:latest .
-          docker push riyazkhan774/backend-image:stable
-          docker push riyazkhan774/backend-image:latest
+          docker build -t riyazkhan774/backend:latest -t riyazkhan774/backend:latest .
+          docker push riyazkhan774/backend:stable
+          docker push riyazkhan774/backend:latest
 
   dev:
     name: DEV ENV
@@ -38,6 +38,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and Push Docker image
         run: |
-          docker build -t riyazkhan774/backend-image:dev -t riyazkhan774/backend-image:dev-latest .
-          docker push riyazkhan774/backend-image:dev
-          docker push riyazkhan774/backend-image:dev-latest
+          docker build -t riyazkhan774/backend:dev -t riyazkhan774/backend:dev-latest .
+          docker push riyazkhan774/backend:dev
+          docker push riyazkhan774/backend:dev-latest
