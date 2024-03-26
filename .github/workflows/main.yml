@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - release
+      - dev
 
 jobs:
   build_and_push:
@@ -35,7 +35,9 @@ jobs:
         run: docker push riyazkhan774/backend:dev-$(git rev-parse --short HEAD)
 
       - name: Update package.json version
-        run: npm version patch
+        run: |
+          cd /home/ubuntu/actions-runner/_work/backend/backend/backend/
+          npm version patch
 
       - name: Build Prod Docker image
         run: docker build -t riyazkhan774/backend:latest .
@@ -44,4 +46,6 @@ jobs:
         run: docker push riyazkhan774/backend:latest
 
       - name: Update package.json version
-        run: npm version patch
+        run: |
+          cd /home/ubuntu/actions-runner/_work/backend/backend/backend/
+          npm version patch
