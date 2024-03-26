@@ -2,7 +2,7 @@ name: Backend Image Build and Push
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - dev
 
@@ -20,8 +20,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and Push Docker image
         run: |
-          docker build -t riyazkhan774/backend:tagname -t riyazkhan774/backend:tagname .
-          docker push riyazkhan774/backend:tagname
+          docker build -t riyazkhan774/backend:tagname .
           docker push riyazkhan774/backend:tagname
 
   dev:
@@ -38,6 +37,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and Push Docker image
         run: |
-          docker build -t riyazkhan774/backend:dev -t riyazkhan774/backend:dev-tagname .
+          docker build -t riyazkhan774/backend:dev .
           docker push riyazkhan774/backend:dev
-          docker push riyazkhan774/backend:dev-tagname
