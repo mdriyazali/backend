@@ -20,8 +20,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and Push Docker image
         run: |
-          docker build -t riyazkhan774/backend:tagname -t riyazkhan774/backend:tagname .
-          docker push riyazkhan774/backend:tagname
+          docker build -t riyazkhan774/backend:latest -t riyazkhan774/backend:tagname .
+          docker push riyazkhan774/backend:latest
           docker push riyazkhan774/backend:tagname
 
   dev:
