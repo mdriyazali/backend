@@ -1,9 +1,10 @@
-name: Build and Push Prod Docker Image
+name: Build and Push Docker Images
 
 on:
   push:
     branches:
-      - release
+      - master
+      - dev
 
 jobs:
   build_and_push:
@@ -21,16 +22,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Docker image
-        run: docker build -t riyazkhan774/backend:latest .
+      - name: Build Dev Docker image
+        run: docker build -t riyazkhan774/backend:dev-$(git rev-parse --short HEAD) .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Push Docker image
+      - name: Push Dev Docker image
+        run: docker push riyazkhan774/backend:dev-$(git rev-parse --short HEAD)
+
+      - name: Update package.json version
+        run: npm version patch
+
+      - name: Build Prod Docker image
+        run: docker build -t riyazkhan774/backend:latest .
+
+      - name: Push Prod Docker image
         run: docker push riyazkhan774/backend:latest
 
       - name: Update package.json version
